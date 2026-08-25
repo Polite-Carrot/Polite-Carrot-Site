@@ -12,7 +12,6 @@
   var cards = document.querySelectorAll("[data-gs-card]");
   var bgs = document.querySelectorAll("[data-gs-bg]");
   var fills = document.querySelectorAll("[data-gs-fill]");
-  var ghostEl = document.getElementById("gs-ghost");
   var countEl = document.getElementById("gs-count");
   var nextEl = document.getElementById("gs-next");
 
@@ -81,7 +80,6 @@
       fill.style.transform = "scaleX(" + value.toFixed(3) + ")";
     }
 
-    if (ghostEl) ghostEl.textContent = pad(current + 1);
     if (countEl) countEl.textContent = pad(current + 1);
     if (nextEl) {
       nextEl.textContent = current >= n - 1 ? "End of catalogue" : "Next — " + TITLES[current + 1];

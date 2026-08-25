@@ -17,7 +17,6 @@
   --border-5: oklch(0.34 0.015 265);
   --border-6: oklch(0.36 0.015 265);
   --card-bg: oklch(0.18 0.012 265 / 0.9);
-  --ghost: oklch(0.185 0.012 265);
   --track-bg: oklch(0.3 0.012 265);
   --shadow: oklch(0.05 0.02 265 / 0.9);
   --gutter: 40px;
@@ -148,23 +147,6 @@ a:hover {
   background:
     radial-gradient(ellipse 70% 55% at 50% 38%, transparent, var(--bg) 82%),
     linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 55%, var(--bg) 100%);
-}
-
-.ghost-wrap {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-
-.ghost {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: min(36vw, 480px);
-  font-weight: 500;
-  color: var(--ghost);
-  letter-spacing: -0.04em;
-  line-height: 1;
 }
 
 .icon-row {
