@@ -108,10 +108,10 @@ a:hover {
      long dead zone first. */
   margin-top: 56px;
   /* Scroll distance per transition kept the same as the original 5-game
-     layout (100vh viewport + 112.5vh per transition), just for 2 games
+     layout (100vh viewport + 112.5vh per transition), just for 3 games
      instead of 5. */
-  height: 212.5vh;
-  height: 212.5svh;
+  height: 325vh;
+  height: 325svh;
 }
 
 .games-stage {
@@ -170,6 +170,11 @@ a:hover {
 .icon-slot[data-gs-icon="1"] {
   opacity: 0;
   transform: translate3d(calc(-50% - 62vw), -50%, 0);
+}
+
+.icon-slot[data-gs-icon="2"] {
+  opacity: 0;
+  transform: translate3d(calc(-50% - 124vw), -50%, 0);
 }
 
 .icon-visual {
