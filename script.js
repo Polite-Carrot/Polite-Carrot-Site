@@ -6,8 +6,6 @@
 
   var track = document.getElementById("games");
   var stage = track && track.firstElementChild;
-  var iconRow = stage && stage.querySelector('[data-gs-row="icons"]');
-  var cardRow = stage && stage.querySelector('[data-gs-row="cards"]');
   var icons = document.querySelectorAll("[data-gs-icon]");
   var cards = document.querySelectorAll("[data-gs-card]");
   var bgs = document.querySelectorAll("[data-gs-bg]");
@@ -30,14 +28,6 @@
     var vh = document.documentElement.clientHeight || window.innerHeight;
     var span = rect.height - vh;
     if (span <= 0) return;
-
-    // Ease the whole group from top-aligned (clears the hero on landing) to
-    // vertically centred once the hero has scrolled away.
-    if (iconRow && cardRow) {
-      var free = stage.clientHeight - 10 - 48 - iconRow.offsetHeight - cardRow.offsetHeight;
-      var ease = Math.max(0, Math.min(1, 1 - rect.top / 90));
-      stage.style.paddingTop = (10 + Math.max(0, free) * 0.5 * ease).toFixed(1) + "px";
-    }
 
     var progress = Math.max(0, Math.min(1, -rect.top / span));
     var n = TITLES.length;

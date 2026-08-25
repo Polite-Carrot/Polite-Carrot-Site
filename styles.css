@@ -58,10 +58,10 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px var(--gutter);
+  padding: 14px var(--gutter);
   /* Belt-and-braces: without a cap, an oversized child (e.g. a logo image
      rendering unstyled) grows this box instead of being clipped by it. */
-  max-height: 70px;
+  max-height: 54px;
   overflow: hidden;
 }
 
@@ -103,10 +103,10 @@ a:hover {
 
 .games-track {
   position: relative;
-  /* Clears the fixed header. Matches the 90px threshold the scroll script
-     eases against, so the stage starts top-aligned (game selection visible
-     immediately) rather than already centred. */
-  margin-top: 90px;
+  /* Just clears the fixed header, kept small so the carousel starts
+     responding to scroll almost immediately instead of sitting through a
+     long dead zone first. */
+  margin-top: 56px;
   /* Scroll distance per transition kept the same as the original 5-game
      layout (100vh viewport + 112.5vh per transition), just for 2 games
      instead of 5. */
@@ -123,7 +123,7 @@ a:hover {
   border-top: 1px solid var(--border-1);
   display: grid;
   grid-template-rows: auto auto;
-  align-content: start;
+  align-content: center;
   padding: 10px 0 48px;
 }
 
@@ -363,11 +363,11 @@ a:hover {
   }
 
   .site-header {
-    padding: 16px var(--gutter);
+    padding: 12px var(--gutter);
   }
 
   .games-track {
-    margin-top: 76px;
+    margin-top: 48px;
   }
 
   .games-stage {
