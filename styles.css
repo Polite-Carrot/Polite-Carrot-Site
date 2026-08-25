@@ -20,6 +20,7 @@
   --ghost: oklch(0.185 0.012 265);
   --track-bg: oklch(0.3 0.012 265);
   --shadow: oklch(0.05 0.02 265 / 0.9);
+  --gutter: 40px;
 }
 
 * {
@@ -58,7 +59,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 40px;
+  padding: 22px var(--gutter);
 }
 
 .logo {
@@ -86,95 +87,23 @@ a:hover {
   color: var(--accent);
 }
 
-/* ---------- Hero ---------- */
-
-.hero {
-  display: grid;
-  padding: 58px 40px 12px;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 56px;
-  align-items: end;
-}
-
-.eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 22px;
-}
-
-.hero-left h1 {
-  font-size: clamp(34px, 4.6vw, 66px);
-  line-height: 0.94;
-  letter-spacing: -0.035em;
-  font-weight: 700;
-  margin: 0;
-  text-wrap: balance;
-}
-
-.hero-right {
-  display: grid;
-  gap: 16px;
-  justify-items: start;
-  align-content: end;
-}
-
-.hero-blurb {
-  max-width: 34ch;
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--muted-2);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 13px 22px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: var(--bg);
-  font-weight: 500;
-}
-
-.btn-outline {
-  border: 1px solid var(--border-5);
-  color: var(--fg);
-}
-
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 /* ---------- Games carousel ---------- */
 
 .games-track {
   position: relative;
+  /* Clears the fixed header. Matches the 90px threshold the scroll script
+     eases against, so the stage starts top-aligned (game selection visible
+     immediately) rather than already centred. */
+  margin-top: 90px;
   height: 550vh;
+  height: 550svh;
 }
 
 .games-stage {
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100svh;
   overflow: hidden;
   border-top: 1px solid var(--border-1);
   display: grid;
@@ -267,7 +196,7 @@ a:hover {
   grid-row: 2;
   display: grid;
   place-items: center;
-  padding: 16px 40px 0;
+  padding: 16px var(--gutter) 0;
 }
 
 .game-card {
@@ -362,12 +291,14 @@ a:hover {
 
 .stage-footer {
   position: absolute;
-  left: 40px;
-  right: 40px;
+  left: var(--gutter);
+  right: var(--gutter);
   bottom: 26px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 24px;
+  row-gap: 10px;
 }
 
 .stage-count,
@@ -376,6 +307,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.16em;
   color: var(--muted-4);
+  white-space: nowrap;
 }
 
 .stage-next {
@@ -408,115 +340,61 @@ a:hover {
   transform: scaleX(1);
 }
 
-/* ---------- About ---------- */
+/* ---------- Small screens ---------- */
 
-.about {
-  padding: 130px 40px;
-  border-top: 1px solid var(--border-1);
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 70px;
-  align-items: start;
-}
+@media (max-width: 640px) {
+  :root {
+    --gutter: 20px;
+  }
 
-.about-left h2 {
-  font-size: clamp(34px, 3.6vw, 58px);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  margin: 0;
-}
+  .site-header {
+    padding: 16px var(--gutter);
+  }
 
-.about-right {
-  display: grid;
-  gap: 26px;
-  font-size: 18px;
-  line-height: 1.65;
-  color: var(--muted-1);
-  max-width: 62ch;
-}
+  .games-track {
+    margin-top: 76px;
+  }
 
-.about-right p {
-  margin: 0;
-  text-wrap: pretty;
-}
+  .games-stage {
+    padding: 8px 0 84px;
+  }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border-2);
-  margin-top: 6px;
-}
+  .game-card {
+    padding: 16px 18px 14px;
+  }
 
-.stat {
-  background: var(--bg);
-  padding: 22px 18px;
-}
+  .card-links {
+    gap: 6px;
+  }
 
-.stat-number {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 30px;
-  color: var(--fg);
-}
+  .store-btn {
+    padding: 8px 4px;
+  }
 
-.stat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-5);
-  margin-top: 8px;
-}
+  .store-sub {
+    font-size: 8px;
+  }
 
-/* ---------- Footer ---------- */
+  .store-main {
+    font-size: 10.5px;
+  }
 
-.site-footer {
-  padding: 100px 40px 46px;
-  border-top: 1px solid var(--border-1);
-}
+  .stage-footer {
+    bottom: 18px;
+  }
 
-.footer-top {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 50px;
-  flex-wrap: wrap;
-}
+  /* Count and next-up share a line; the progress bar drops to its own
+     full-width line below rather than squeezing all three into one row. */
+  .stage-count {
+    order: 1;
+  }
 
-.footer-top h2 {
-  font-size: clamp(34px, 4.4vw, 72px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  margin: 0;
-}
+  .stage-next {
+    order: 2;
+  }
 
-.footer-email {
-  display: inline-block;
-  margin-top: 22px;
-  font-size: 20px;
-  border-bottom: 1px solid var(--accent);
-  padding-bottom: 3px;
-}
-
-.footer-links {
-  display: flex;
-  gap: 26px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 70px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted-6);
+  .progress-track {
+    order: 3;
+    flex-basis: 100%;
+  }
 }
