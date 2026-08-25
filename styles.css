@@ -60,6 +60,10 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   padding: 22px var(--gutter);
+  /* Belt-and-braces: without a cap, an oversized child (e.g. a logo image
+     rendering unstyled) grows this box instead of being clipped by it. */
+  max-height: 70px;
+  overflow: hidden;
 }
 
 .logo {
