@@ -103,10 +103,12 @@ a:hover {
 
 .games-track {
   position: relative;
-  /* Just clears the fixed header, kept small so the carousel starts
-     responding to scroll almost immediately instead of sitting through a
-     long dead zone first. */
-  margin-top: 56px;
+  /* No top margin: the sticky stage below starts flush with the document
+     so it's fully within the viewport (and thus fully visible, footer
+     included) from the very first pixel of scroll. A margin here used to
+     push the stage's bottom edge below the fold until you'd scrolled past
+     it, hiding the counter/progress row at rest. Header clearance is
+     handled by the stage's own top padding instead. */
   /* Scroll distance per transition kept the same as the original 5-game
      layout (100vh viewport + 112.5vh per transition), just for 3 games
      instead of 5. */
@@ -124,7 +126,7 @@ a:hover {
   display: grid;
   grid-template-rows: auto auto;
   align-content: center;
-  padding: 10px 0 48px;
+  padding: 56px 0 48px;
 }
 
 .slide-bg {
@@ -371,12 +373,8 @@ a:hover {
     padding: 12px var(--gutter);
   }
 
-  .games-track {
-    margin-top: 48px;
-  }
-
   .games-stage {
-    padding: 8px 0 84px;
+    padding: 48px 0 84px;
   }
 
   .game-card {
