@@ -63,11 +63,20 @@ a:hover {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--fg);
+}
+
+.logo-mark {
+  display: block;
+  height: 1em;
+  width: auto;
 }
 
 .nav {
