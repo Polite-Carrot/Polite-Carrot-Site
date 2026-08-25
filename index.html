@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=2" />
+<link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
@@ -25,6 +25,10 @@
 <div id="games" class="games-track">
   <div class="games-stage">
 
+    <div class="slide-bg" data-gs-bg="0">
+      <img src="assets/tide-runner-bg.jpg" alt="" />
+    </div>
+
     <div class="ghost-wrap">
       <div id="gs-ghost" class="ghost">01</div>
     </div>
@@ -32,7 +36,7 @@
     <div class="icon-row" data-gs-row="icons">
       <div class="icon-slot" data-gs-icon="0">
         <div class="icon-visual">
-          <div class="art-placeholder">Voidrunner<br />app icon</div>
+          <img class="game-icon-img" src="assets/tide-runner-icon.png" alt="Tide Runner app icon" />
         </div>
       </div>
       <div class="icon-slot" data-gs-icon="1">
@@ -60,7 +64,7 @@
     <div class="card-row" data-gs-row="cards">
       <article class="game-card" data-gs-card="0">
         <p class="card-eyebrow">01 — Out now</p>
-        <h2>Voidrunner</h2>
+        <h2>Tide Runner</h2>
         <p class="card-pitch">A twin-stick roguelike about outrunning your own wreckage. Every run rebuilds the ship from what the last one left behind.</p>
         <div class="card-links">
           <a href="#games" class="store-btn store-btn-primary"><span class="store-sub">Get it on</span><span class="store-main">Play Store</span></a>
@@ -125,6 +129,6 @@
   </div>
 </div>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

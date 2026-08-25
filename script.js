@@ -1,5 +1,5 @@
 (function () {
-  var TITLES = ["Voidrunner", "Tilewright", "Last Light Harbour", "Parallax", "Gravel & Gold"];
+  var TITLES = ["Tide Runner", "Tilewright", "Last Light Harbour", "Parallax", "Gravel & Gold"];
   var TRAVEL = 62; // vw of horizontal travel per game
   var RISE = 30;   // vh it climbs on the way in
   var SPIN = 8;    // deg of tilt
@@ -10,6 +10,7 @@
   var cardRow = stage && stage.querySelector('[data-gs-row="cards"]');
   var icons = document.querySelectorAll("[data-gs-icon]");
   var cards = document.querySelectorAll("[data-gs-card]");
+  var bgs = document.querySelectorAll("[data-gs-bg]");
   var fills = document.querySelectorAll("[data-gs-fill]");
   var ghostEl = document.getElementById("gs-ghost");
   var countEl = document.getElementById("gs-count");
@@ -64,6 +65,13 @@
       card.style.opacity = Math.max(0, 1 - ca * 1.9).toFixed(3);
       card.style.transform = "translate3d(0, " + (cd * 40).toFixed(1) + "px, 0)";
       card.style.pointerEvents = ca < 0.35 ? "auto" : "none";
+    }
+
+    for (var g = 0; g < bgs.length; g++) {
+      var bgEl = bgs[g];
+      var bd = Number(bgEl.getAttribute("data-gs-bg")) - pos;
+      var ba = Math.min(1, Math.abs(bd));
+      bgEl.style.opacity = Math.max(0, 1 - ba * 1.9).toFixed(3);
     }
 
     for (var f = 0; f < fills.length; f++) {
