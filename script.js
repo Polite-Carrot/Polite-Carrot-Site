@@ -25,11 +25,24 @@
     if (!track || !stage) return;
 
     var rect = track.getBoundingClientRect();
-    var vh = document.documentElement.clientHeight || window.innerHeight;
+    // Measure the sticky stage's own rendered height rather than the
+    // viewport independently — on mobile browsers with a dynamic
+    // address bar, the two can briefly disagree (the stage is sized with
+    // svh, which holds steady, while window/documentElement dimensions
+    // shift as the bar hides/shows), which left the last icon just
+    // short of dead-centre at the bottom of the page.
+    var vh = stage.getBoundingClientRect().height || document.documentElement.clientHeight || window.innerHeight;
     var span = rect.height - vh;
     if (span <= 0) return;
 
     var progress = Math.max(0, Math.min(1, -rect.top / span));
+    // Snap to the ends once the page itself can't scroll any further, so
+    // sub-pixel rounding never leaves the first/last icon barely off-centre.
+    var doc = document.documentElement;
+    var atTop = window.scrollY <= 0;
+    var atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
+    if (atTop) progress = 0;
+    else if (atBottom) progress = 1;
     var n = TITLES.length;
     var pos = progress * (n - 1);
     var current = Math.round(pos);
