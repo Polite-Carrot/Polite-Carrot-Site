@@ -425,3 +425,66 @@ a:hover {
     flex-basis: 100%;
   }
 }
+
+/* ---------- Legal pages ---------- */
+
+.legal {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 130px var(--gutter) 100px;
+}
+
+.legal .eyebrow {
+  margin: 0 0 18px;
+}
+
+.legal h1 {
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.legal .legal-updated {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted-4);
+  margin: 0 0 48px;
+}
+
+.legal h2 {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  margin: 40px 0 14px;
+}
+
+.legal p,
+.legal li {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted-1);
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+
+.legal ul {
+  margin: 0 0 16px;
+  padding-left: 22px;
+}
+
+.legal a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-back {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
