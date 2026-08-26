@@ -1,5 +1,5 @@
 (function () {
-  var TITLES = ["Tide Runner", "Colour Jars", "Coming Soon"];
+  var TITLES = ["Tide Runner", "Color Sorter", "Coming Soon"];
   var TRAVEL = 62; // vw of horizontal travel per game
   var RISE = 30;   // vh it climbs on the way in
   var SPIN = 8;    // deg of tilt
