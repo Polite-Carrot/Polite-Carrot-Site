@@ -11,7 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=12" />
+<link rel="stylesheet" href="styles.css?v=13" />
+<script src="analytics.js?v=1"></script>
 </head>
 <body>
 
@@ -25,21 +26,33 @@
 <main class="legal">
   <p class="eyebrow">Legal</p>
   <h1>Privacy Policy</h1>
-  <p class="legal-updated">Last updated 25 August 2026</p>
+  <p class="legal-updated">Last updated 26 August 2026</p>
 
-  <p>Polite Carrot ("we", "us") publishes small games for iOS, Android, and the web. This policy covers all of our games. It's short, because there isn't much to say: we don't collect your personal data.</p>
+  <p>Polite Carrot ("we", "us") publishes small games for iOS, Android, and the web. This policy covers all of our games and this website. We don't collect anything that identifies you personally — the analytics described below is aggregate usage data, used to understand gameplay and catch errors.</p>
 
   <h2>Information we collect</h2>
-  <p>None. Our games do not collect, store, or transmit any personal information — no account, no email address, no device identifiers, no location data.</p>
+  <p>We don't collect anything like your name, email address, or precise location. What we do collect is anonymous usage and diagnostic data through Google Analytics and Firebase — things like which screens or levels get played, session length, device/OS type, and crash or error reports. This helps us understand how the games are actually played and fix what's broken.</p>
 
   <h2>Gameplay data</h2>
-  <p>Things like your progress, settings, and high scores are saved locally on your own device, using standard local storage. That data never leaves your device, and we never see it. Uninstalling a game removes it.</p>
+  <p>Things like your progress, settings, and high scores are saved locally on your own device, using standard local storage. That data never leaves your device, and we never see it. Uninstalling a game removes it. This is separate from the analytics data described above.</p>
 
   <h2>Third-party services</h2>
-  <p>Our games don't currently include any third-party analytics, advertising, or tracking SDKs. If that ever changes for a future release, we'll update this policy and name the service before it ships.</p>
+  <p>Our games and this website use Google Analytics (GA4) and Firebase to track engagement and understand gameplay and errors. These services may set cookies or use similar identifiers on the website, and use device-level identifiers in the apps. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a> for how they handle that data.</p>
+  <p>On this website, you can turn analytics on or off at any time below. In the apps, analytics can be limited through your device's own privacy controls (for example, iOS's app tracking permissions).</p>
+
+  <div class="analytics-toggle">
+    <div>
+      <p class="analytics-toggle-label">Website analytics</p>
+      <p class="analytics-toggle-desc">Google Analytics for this website only. On by default — switch it off any time.</p>
+    </div>
+    <button type="button" id="analytics-toggle" class="toggle-switch" role="switch" aria-checked="true" aria-label="Website analytics">
+      <span class="toggle-knob"></span>
+    </button>
+  </div>
+  <p id="analytics-status" class="legal-updated" style="margin-top:-8px;">Analytics is currently <strong>on</strong>.</p>
 
   <h2>Children's privacy</h2>
-  <p>Because we don't collect personal information from anyone, we don't knowingly collect it from children either. Our games are safe for players of any age from a privacy standpoint.</p>
+  <p>We don't knowingly collect personal information from anyone, children included. The analytics data described above is aggregate and isn't used to identify individual players.</p>
 
   <h2>Changes to this policy</h2>
   <p>If this policy ever changes — for example, if a future game adds an online feature that needs it — we'll update this page and change the date at the top.</p>
@@ -60,6 +73,27 @@
     <a href="privacy.html">Privacy</a>
   </nav>
 </footer>
+
+<script>
+(function () {
+  var btn = document.getElementById("analytics-toggle");
+  var status = document.getElementById("analytics-status");
+  if (!btn || !status || !window.politeCarrotAnalytics) return;
+
+  function render(on) {
+    btn.setAttribute("aria-checked", on ? "true" : "false");
+    status.innerHTML = "Analytics is currently <strong>" + (on ? "on" : "off") + "</strong>.";
+  }
+
+  render(politeCarrotAnalytics.isEnabled());
+
+  btn.addEventListener("click", function () {
+    var next = btn.getAttribute("aria-checked") !== "true";
+    politeCarrotAnalytics.setEnabled(next);
+    render(next);
+  });
+})();
+</script>
 
 </body>
 </html>

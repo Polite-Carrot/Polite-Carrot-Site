@@ -480,6 +480,64 @@ a:hover {
   text-transform: uppercase;
 }
 
+.analytics-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid var(--border-3);
+  background: var(--card-bg);
+  padding: 18px 22px;
+  margin: 20px 0 10px;
+}
+
+.analytics-toggle-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0 0 4px;
+}
+
+.analytics-toggle-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted-3);
+  margin: 0;
+}
+
+.toggle-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 25px;
+  padding: 0;
+  border: 1px solid var(--border-5);
+  border-radius: 999px;
+  background: var(--border-2);
+  cursor: pointer;
+}
+
+.toggle-switch[aria-checked="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--fg);
+  transition: transform 0.15s ease;
+}
+
+.toggle-switch[aria-checked="true"] .toggle-knob {
+  transform: translateX(19px);
+  background: var(--bg);
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
