@@ -79,7 +79,10 @@
     for (var f = 0; f < fills.length; f++) {
       var fill = fills[f];
       var fi = Number(fill.getAttribute("data-gs-fill"));
-      var value = fi < current ? 1 : (fi > current ? 0 : Math.max(0, 1 - Math.abs(fi - pos)));
+      // Each bar fills once, monotonically, as pos sweeps past it — no
+      // dependency on the rounded "current" index, so there's no point
+      // where a bar has to un-fill before the next one takes over.
+      var value = Math.max(0, Math.min(1, pos - fi + 1));
       fill.style.transform = "scaleX(" + value.toFixed(3) + ")";
     }
 
@@ -89,9 +92,37 @@
     }
   }
 
+  // Once scrolling settles, ease the rest of the way to whichever game is
+  // nearest, so the carousel never rests half-transitioned between two icons.
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var snapTimer = null;
+
+  function snapToNearest() {
+    if (!track || !stage) return;
+    var rect = track.getBoundingClientRect();
+    var vh = stage.getBoundingClientRect().height || document.documentElement.clientHeight || window.innerHeight;
+    var span = rect.height - vh;
+    if (span <= 0) return;
+
+    var progress = -rect.top / span;
+    if (progress <= 0 || progress >= 1) return; // already resting at an end
+
+    var n = TITLES.length;
+    var targetProgress = Math.round(progress * (n - 1)) / (n - 1);
+    var delta = (targetProgress - progress) * span;
+    if (Math.abs(delta) < 1) return;
+    window.scrollTo({ top: window.scrollY + delta, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
+  function onScroll() {
+    frame();
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(snapToNearest, 140);
+  }
+
   // Timer-driven in addition to scroll/resize so the motion stays smooth
   // even in contexts that throttle rAF/scroll events (e.g. background tabs).
-  window.addEventListener("scroll", frame, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", frame);
   setInterval(frame, 40);
   frame();
