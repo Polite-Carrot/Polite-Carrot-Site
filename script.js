@@ -117,7 +117,7 @@
   function onScroll() {
     frame();
     clearTimeout(snapTimer);
-    snapTimer = setTimeout(snapToNearest, 60);
+    snapTimer = setTimeout(snapToNearest, 300);
   }
 
   // Timer-driven in addition to scroll/resize so the motion stays smooth
