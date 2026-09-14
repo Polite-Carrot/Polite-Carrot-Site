@@ -74,6 +74,7 @@ a:hover {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--fg);
+  text-decoration: none;
 }
 
 .logo-mark {
