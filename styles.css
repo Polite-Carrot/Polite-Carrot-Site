@@ -110,9 +110,9 @@ a:hover {
      push the stage's bottom edge below the fold until you'd scrolled past
      it, hiding the counter/progress row at rest. Header clearance is
      handled by the stage's own top padding instead. */
-  /* 100vh viewport + 112.5vh per transition, for 5 games (4 transitions). */
-  height: 550vh;
-  height: 550svh;
+  /* 100vh viewport + 112.5vh per transition, for 6 games (5 transitions). */
+  height: 662.5vh;
+  height: 662.5svh;
 }
 
 .games-stage {
@@ -186,6 +186,11 @@ a:hover {
 .icon-slot[data-gs-icon="4"] {
   opacity: 0;
   transform: translate3d(calc(-50% - 248vw), -50%, 0);
+}
+
+.icon-slot[data-gs-icon="5"] {
+  opacity: 0;
+  transform: translate3d(calc(-50% - 310vw), -50%, 0);
 }
 
 .icon-visual {

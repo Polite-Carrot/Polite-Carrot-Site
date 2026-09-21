@@ -1,5 +1,5 @@
 (function () {
-  var TITLES = ["Tide Runner", "Color Match & Merge", "Color Block Fall", "Color Flood", "Needle In A Haystack"];
+  var TITLES = ["Tide Runner", "Color Match & Merge", "Color Block Fall", "Color Flood", "Needle In A Haystack", "Border Hopper"];
   var TRAVEL = 62; // vw of horizontal travel per game
   var RISE = 30;   // vh it climbs on the way in
   var SPIN = 8;    // deg of tilt
