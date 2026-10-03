@@ -11,119 +11,140 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=20" />
+<link rel="stylesheet" href="styles.css?v=21" />
 <script src="analytics.js?v=2"></script>
 </head>
 <body>
 
 <header class="site-header">
   <a href="/" class="logo">
-    <img src="assets/carrot-logo.png" alt="" class="logo-mark" />
+    <img src="/assets/carrot-logo.png" alt="" class="logo-mark" />
     Polite Carrot
   </a>
+  <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-menu">
+    <span class="menu-toggle-bars" aria-hidden="true"></span>
+    <span class="menu-toggle-label">Menu</span>
+  </button>
 </header>
 
-<section class="feature" aria-labelledby="feature-title">
-  <div class="feature-bg">
-    <img src="assets/border-hopper-bg.jpg" alt="" />
-  </div>
-  <div class="feature-body">
-    <div class="feature-icon">
-      <img src="assets/border-hopper-icon.png" alt="Border Hopper app icon" />
+<div class="menu" id="site-menu" hidden>
+  <div class="menu-backdrop" data-menu-close></div>
+  <nav class="menu-panel" aria-label="Site menu">
+    <button type="button" class="menu-close" data-menu-close aria-label="Close menu">Close</button>
+    <p class="card-eyebrow">Games</p>
+    <ul class="menu-games">
+      <li><a href="/#tide-runner"><img src="/assets/tide-runner-icon.png" alt="" />Tide Runner</a></li>
+      <li><a href="/#color-match-merge"><img src="/assets/colour-jars-icon.png" alt="" />Color Match &amp; Merge</a></li>
+      <li><a href="/#color-block-fall"><img src="/assets/color-block-fall-icon.png" alt="" />Color Block Fall</a></li>
+      <li><a href="/#color-flood"><img src="/assets/color-flood-icon.png" alt="" />Color Flood</a></li>
+      <li><a href="/#needle-in-a-haystack"><img src="/assets/needle-in-a-haystack-icon.png" alt="" />Needle In A Haystack</a></li>
+      <li><a href="/#border-hopper"><img src="/assets/border-hopper-icon.png" alt="" />Border Hopper</a></li>
+    </ul>
+    <a href="/games/" class="menu-all">All games →</a>
+    <ul class="menu-links">
+      <li><a href="/privacy/">Privacy policy</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+
+<main class="wall-stage">
+  <div class="wall-bgs">
+    <div class="slide-bg" data-bg="tide-runner">
+      <img src="assets/tide-runner-bg.jpg" alt="" />
     </div>
-    <p class="card-eyebrow">Newest — Puzzle</p>
-    <h1 id="feature-title">Border Hopper</h1>
-    <p class="card-pitch">Cross the world one land border at a time. Real geography, 250 levels, fewest moves wins.</p>
-    <div class="card-links">
-      <a href="https://borderhopper.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-      <a href="#all-games" class="store-btn"><span class="store-sub">Browse</span><span class="store-main">All games</span></a>
+    <div class="slide-bg" data-bg="color-match-merge">
+      <img src="assets/colour-jars-bg.jpg" alt="" />
+    </div>
+    <div class="slide-bg" data-bg="color-block-fall">
+      <img src="assets/color-block-fall-bg.jpg" alt="" />
+    </div>
+    <div class="slide-bg" data-bg="color-flood">
+      <img src="assets/color-flood-bg.jpg" alt="" />
+    </div>
+    <div class="slide-bg" data-bg="needle-in-a-haystack">
+      <img src="assets/needle-in-a-haystack-bg.jpg" alt="" />
+    </div>
+    <div class="slide-bg" data-bg="border-hopper">
+      <img src="assets/border-hopper-bg.jpg" alt="" />
     </div>
   </div>
-</section>
 
-<main id="all-games" class="games-page home-catalogue">
-  <p class="card-eyebrow">Catalogue</p>
-  <h2 class="catalogue-title">All games</h2>
-
-  <div class="category-tabs" role="group" aria-label="Filter games by category">
-    <button type="button" class="category-tab" data-category="all" aria-pressed="true">All</button>
-    <button type="button" class="category-tab" data-category="puzzle" aria-pressed="false">Puzzle</button>
-    <button type="button" class="category-tab" data-category="racing" aria-pressed="false">Racing</button>
-    <button type="button" class="category-tab" data-category="simulation" aria-pressed="false">Simulation</button>
+  <div class="icon-wall" role="group" aria-label="Our games">
+      <button type="button" class="wall-icon" data-game="tide-runner" aria-pressed="false" style="--x: 20%; --y: 30%; --s: 1.1; --r: -8deg; --d: -0.0s; --mx: 28%; --my: 12%">
+        <img src="assets/tide-runner-icon.png" alt="Tide Runner" />
+      </button>
+      <button type="button" class="wall-icon" data-game="color-match-merge" aria-pressed="false" style="--x: 50%; --y: 20%; --s: 0.95; --r: 5deg; --d: -1.3s; --mx: 72%; --my: 24%">
+        <img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" />
+      </button>
+      <button type="button" class="wall-icon" data-game="color-block-fall" aria-pressed="false" style="--x: 80%; --y: 32%; --s: 1.05; --r: 9deg; --d: -2.6s; --mx: 28%; --my: 45%">
+        <img src="assets/color-block-fall-icon.png" alt="Color Block Fall" />
+      </button>
+      <button type="button" class="wall-icon" data-game="color-flood" aria-pressed="false" style="--x: 27%; --y: 72%; --s: 0.9; --r: 6deg; --d: -3.9s; --mx: 72%; --my: 56%">
+        <img src="assets/color-flood-icon.png" alt="Color Flood" />
+      </button>
+      <button type="button" class="wall-icon" data-game="needle-in-a-haystack" aria-pressed="false" style="--x: 54%; --y: 64%; --s: 1.15; --r: -5deg; --d: -5.2s; --mx: 28%; --my: 80%">
+        <img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" />
+      </button>
+      <button type="button" class="wall-icon" data-game="border-hopper" aria-pressed="false" style="--x: 80%; --y: 74%; --s: 1; --r: -9deg; --d: -6.5s; --mx: 72%; --my: 89%">
+        <img src="assets/border-hopper-icon.png" alt="Border Hopper" />
+      </button>
   </div>
 
-  <div class="game-grid">
-    <article class="game-tile" data-category="racing">
-      <div class="game-tile-icon">
-        <img src="assets/tide-runner-icon.png" alt="Tide Runner app icon" />
-      </div>
-      <p class="game-tile-category">Racing — Out now</p>
+  <div class="wall-info" aria-live="polite">
+    <div class="wall-intro" id="wall-intro">
+      <p class="card-eyebrow">Pocket-sized games</p>
+      <h1>Pick a game, any game.</h1>
+      <p class="card-pitch">Puzzle, racing, and simulation games for iOS, Android, and straight in the browser. Tap an icon to find out more.</p>
+    </div>
+    <article class="game-detail" id="tide-runner" hidden>
+      <p class="card-eyebrow">Racing — Out now</p>
       <h2>Tide Runner</h2>
-      <p class="game-tile-pitch">Race, unlock, repeat. New maps, new boats, and difficulty that bites back.</p>
+      <p class="card-pitch">Race, unlock, repeat. New maps, new boats, and difficulty that bites back.</p>
       <div class="card-links">
         <a href="https://polite-carrot.github.io/Tide-Runner/" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
         <a href="https://apps.apple.com/gb/app/tide-runner/id6804190722" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">App Store</span></a>
         <a href="https://play.google.com/store/apps/details?id=com.politecarrot.tiderunner" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">Play Store</span></a>
       </div>
     </article>
-
-    <article class="game-tile" data-category="puzzle">
-      <div class="game-tile-icon">
-        <img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge app icon" />
-      </div>
-      <p class="game-tile-category">Puzzle — Out now</p>
+    <article class="game-detail" id="color-match-merge" hidden>
+      <p class="card-eyebrow">Puzzle — Out now</p>
       <h2>Color Match &amp; Merge</h2>
-      <p class="game-tile-pitch">Pour and sort the colours until every pot is pure. Relaxing, endlessly tricky.</p>
+      <p class="card-pitch">Pour and sort the colours until every pot is pure. Relaxing, endlessly tricky.</p>
       <div class="card-links">
         <a href="https://polite-carrot.github.io/color-sorting/" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
         <a href="https://apps.apple.com/gb/app/color-match-merge/id6805944228" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">App Store</span></a>
         <a href="https://play.google.com/store/apps/details?id=com.politecarrot.colorjars" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">Play Store</span></a>
       </div>
     </article>
-
-    <article class="game-tile" data-category="puzzle">
-      <div class="game-tile-icon">
-        <img src="assets/color-block-fall-icon.png" alt="Color Block Fall app icon" />
-      </div>
-      <p class="game-tile-category">Puzzle — Out now</p>
+    <article class="game-detail" id="color-block-fall" hidden>
+      <p class="card-eyebrow">Puzzle — Out now</p>
       <h2>Color Block Fall</h2>
-      <p class="game-tile-pitch">Drop, stack, and solve! Place falling blocks strategically, build your perfect stack, and keep the board clear in this addictive puzzle challenge.</p>
+      <p class="card-pitch">Drop, stack, and solve! Place falling blocks strategically, build your perfect stack, and keep the board clear in this addictive puzzle challenge.</p>
       <div class="card-links">
         <a href="https://colorblockfall.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
       </div>
     </article>
-
-    <article class="game-tile" data-category="puzzle">
-      <div class="game-tile-icon">
-        <img src="assets/color-flood-icon.png" alt="Color Flood app icon" />
-      </div>
-      <p class="game-tile-category">Puzzle — Out now</p>
+    <article class="game-detail" id="color-flood" hidden>
+      <p class="card-eyebrow">Puzzle — Out now</p>
       <h2>Color Flood</h2>
-      <p class="game-tile-pitch">Flood the board with one colour in as few moves as you can.</p>
+      <p class="card-pitch">Flood the board with one colour in as few moves as you can.</p>
       <div class="card-links">
         <a href="https://colorflood.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
       </div>
     </article>
-
-    <article class="game-tile" data-category="simulation">
-      <div class="game-tile-icon">
-        <img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack app icon" />
-      </div>
-      <p class="game-tile-category">Simulation — Out now</p>
+    <article class="game-detail" id="needle-in-a-haystack" hidden>
+      <p class="card-eyebrow">Simulation — Out now</p>
       <h2>Needle In A Haystack</h2>
-      <p class="game-tile-pitch">Search a barn full of hay for a single needle. Dig, sift, and upgrade your way deeper.</p>
+      <p class="card-pitch">Search a barn full of hay for a single needle. Dig, sift, and upgrade your way deeper.</p>
       <div class="card-links">
         <a href="https://needleinahaystack.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
       </div>
     </article>
-
-    <article class="game-tile" data-category="puzzle">
-      <div class="game-tile-icon">
-        <img src="assets/border-hopper-icon.png" alt="Border Hopper app icon" />
-      </div>
-      <p class="game-tile-category">Puzzle — Out now</p>
+    <article class="game-detail" id="border-hopper" hidden>
+      <p class="card-eyebrow">Puzzle — Out now</p>
       <h2>Border Hopper</h2>
-      <p class="game-tile-pitch">Cross the world one land border at a time. Real geography, 250 levels, fewest moves wins.</p>
+      <p class="card-pitch">Cross the world one land border at a time. Real geography, 250 levels, fewest moves wins.</p>
       <div class="card-links">
         <a href="https://borderhopper.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
       </div>
@@ -139,9 +160,10 @@
   <nav class="nav">
     <a href="games/">Games</a>
     <a href="privacy/">Privacy</a>
+    <a href="contact/">Contact</a>
   </nav>
 </footer>
 
-<script src="script.js?v=15"></script>
+<script src="script.js?v=16"></script>
 </body>
 </html>
