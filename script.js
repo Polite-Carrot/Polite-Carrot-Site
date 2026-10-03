@@ -1,129 +1,19 @@
+// Category filter for the game grid (homepage and games page).
 (function () {
-  var TITLES = ["Tide Runner", "Color Match & Merge", "Color Block Fall", "Color Flood", "Needle In A Haystack", "Border Hopper"];
-  var TRAVEL = 62; // vw of horizontal travel per game
-  var RISE = 30;   // vh it climbs on the way in
-  var SPIN = 8;    // deg of tilt
+  var tabs = document.querySelectorAll(".category-tab");
+  var tiles = document.querySelectorAll(".game-tile");
 
-  var track = document.getElementById("games");
-  var stage = track && track.firstElementChild;
-  var icons = document.querySelectorAll("[data-gs-icon]");
-  var cards = document.querySelectorAll("[data-gs-card]");
-  var bgs = document.querySelectorAll("[data-gs-bg]");
-  var fills = document.querySelectorAll("[data-gs-fill]");
-  var countEl = document.getElementById("gs-count");
-  var nextEl = document.getElementById("gs-next");
-
-  function pad(v) {
-    return v < 10 ? "0" + v : "" + v;
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener("click", function (e) {
+      var tab = e.currentTarget;
+      var category = tab.getAttribute("data-category");
+      for (var t = 0; t < tabs.length; t++) {
+        tabs[t].setAttribute("aria-pressed", tabs[t] === tab ? "true" : "false");
+      }
+      for (var g = 0; g < tiles.length; g++) {
+        var show = category === "all" || tiles[g].getAttribute("data-category") === category;
+        tiles[g].hidden = !show;
+      }
+    });
   }
-
-  function signed(v, unit) {
-    return (v < 0 ? " - " + Math.abs(v).toFixed(2) : " + " + v.toFixed(2)) + unit;
-  }
-
-  function frame() {
-    if (!track || !stage) return;
-
-    var rect = track.getBoundingClientRect();
-    // Measure the sticky stage's own rendered height rather than the
-    // viewport independently — on mobile browsers with a dynamic
-    // address bar, the two can briefly disagree (the stage is sized with
-    // svh, which holds steady, while window/documentElement dimensions
-    // shift as the bar hides/shows), which left the last icon just
-    // short of dead-centre at the bottom of the page.
-    var vh = stage.getBoundingClientRect().height || document.documentElement.clientHeight || window.innerHeight;
-    var span = rect.height - vh;
-    if (span <= 0) return;
-
-    var progress = Math.max(0, Math.min(1, -rect.top / span));
-    // Snap to the ends once the page itself can't scroll any further, so
-    // sub-pixel rounding never leaves the first/last icon barely off-centre.
-    var doc = document.documentElement;
-    var atTop = window.scrollY <= 0;
-    var atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
-    if (atTop) progress = 0;
-    else if (atBottom) progress = 1;
-    var n = TITLES.length;
-    var pos = progress * (n - 1);
-    var current = Math.round(pos);
-
-    for (var i = 0; i < icons.length; i++) {
-      var icon = icons[i];
-      var idx = Number(icon.getAttribute("data-gs-icon"));
-      var d = idx - pos;
-      var a = Math.min(1, Math.abs(d));
-      icon.style.transform =
-        "translate3d(calc(-50%" + signed(-d * TRAVEL, "vw") + "), calc(-50%" +
-        signed(d * RISE, "vh") + "), 0) scale(" + (1 - a * 0.22).toFixed(3) +
-        ") rotate(" + (d * SPIN).toFixed(2) + "deg)";
-      icon.style.opacity = a < 0.999 ? (1 - a * a * 0.85).toFixed(3) : "0";
-      icon.style.zIndex = String(100 - Math.round(a * 90));
-    }
-
-    for (var j = 0; j < cards.length; j++) {
-      var card = cards[j];
-      var cd = Number(card.getAttribute("data-gs-card")) - pos;
-      var ca = Math.min(1, Math.abs(cd));
-      card.style.opacity = Math.max(0, 1 - ca * 1.9).toFixed(3);
-      card.style.transform = "translate3d(0, " + (cd * 40).toFixed(1) + "px, 0)";
-      card.style.pointerEvents = ca < 0.35 ? "auto" : "none";
-    }
-
-    for (var g = 0; g < bgs.length; g++) {
-      var bgEl = bgs[g];
-      var bd = Number(bgEl.getAttribute("data-gs-bg")) - pos;
-      var ba = Math.min(1, Math.abs(bd));
-      bgEl.style.opacity = Math.max(0, 1 - ba * 1.9).toFixed(3);
-    }
-
-    for (var f = 0; f < fills.length; f++) {
-      var fill = fills[f];
-      var fi = Number(fill.getAttribute("data-gs-fill"));
-      // Each bar fills once, monotonically, as pos sweeps past it — no
-      // dependency on the rounded "current" index, so there's no point
-      // where a bar has to un-fill before the next one takes over.
-      var value = Math.max(0, Math.min(1, pos - fi + 1));
-      fill.style.transform = "scaleX(" + value.toFixed(3) + ")";
-    }
-
-    if (countEl) countEl.textContent = pad(current + 1);
-    if (nextEl) {
-      nextEl.textContent = current >= n - 1 ? "End of catalogue" : "Next — " + TITLES[current + 1];
-    }
-  }
-
-  // Once scrolling settles, ease the rest of the way to whichever game is
-  // nearest, so the carousel never rests half-transitioned between two icons.
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var snapTimer = null;
-
-  function snapToNearest() {
-    if (!track || !stage) return;
-    var rect = track.getBoundingClientRect();
-    var vh = stage.getBoundingClientRect().height || document.documentElement.clientHeight || window.innerHeight;
-    var span = rect.height - vh;
-    if (span <= 0) return;
-
-    var progress = -rect.top / span;
-    if (progress <= 0 || progress >= 1) return; // already resting at an end
-
-    var n = TITLES.length;
-    var targetProgress = Math.round(progress * (n - 1)) / (n - 1);
-    var delta = (targetProgress - progress) * span;
-    if (Math.abs(delta) < 1) return;
-    window.scrollTo({ top: window.scrollY + delta, behavior: reduceMotion ? "auto" : "smooth" });
-  }
-
-  function onScroll() {
-    frame();
-    clearTimeout(snapTimer);
-    snapTimer = setTimeout(snapToNearest, 300);
-  }
-
-  // Timer-driven in addition to scroll/resize so the motion stays smooth
-  // even in contexts that throttle rAF/scroll events (e.g. background tabs).
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", frame);
-  setInterval(frame, 40);
-  frame();
 })();

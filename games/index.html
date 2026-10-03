@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/styles.css?v=19" />
+<link rel="stylesheet" href="/styles.css?v=20" />
 <script src="/analytics.js?v=2"></script>
 </head>
 <body>
@@ -125,26 +125,7 @@
   </nav>
 </footer>
 
-<script>
-(function () {
-  var tabs = document.querySelectorAll(".category-tab");
-  var tiles = document.querySelectorAll(".game-tile");
-
-  for (var i = 0; i < tabs.length; i++) {
-    tabs[i].addEventListener("click", function (e) {
-      var tab = e.currentTarget;
-      var category = tab.getAttribute("data-category");
-      for (var t = 0; t < tabs.length; t++) {
-        tabs[t].setAttribute("aria-pressed", tabs[t] === tab ? "true" : "false");
-      }
-      for (var g = 0; g < tiles.length; g++) {
-        var show = category === "all" || tiles[g].getAttribute("data-category") === category;
-        tiles[g].hidden = !show;
-      }
-    });
-  }
-})();
-</script>
+<script src="/script.js?v=15"></script>
 
 </body>
 </html>

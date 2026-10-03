@@ -100,43 +100,25 @@ a:hover {
   color: var(--accent);
 }
 
-/* ---------- Games carousel ---------- */
+/* ---------- Featured game ---------- */
 
-.games-track {
+.feature {
   position: relative;
-  /* No top margin: the sticky stage below starts flush with the document
-     so it's fully within the viewport (and thus fully visible, footer
-     included) from the very first pixel of scroll. A margin here used to
-     push the stage's bottom edge below the fold until you'd scrolled past
-     it, hiding the counter/progress row at rest. Header clearance is
-     handled by the stage's own top padding instead. */
-  /* 100vh viewport + 112.5vh per transition, for 6 games (5 transitions). */
-  height: 662.5vh;
-  height: 662.5svh;
-}
-
-.games-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
-  overflow: hidden;
-  border-top: 1px solid var(--border-1);
+  min-height: min(72svh, 640px);
   display: grid;
-  grid-template-rows: auto auto;
-  align-content: center;
-  padding: 56px 0 48px;
+  place-items: center;
+  padding: 96px var(--gutter) 56px;
+  border-bottom: 1px solid var(--border-1);
+  overflow: hidden;
 }
 
-.slide-bg {
+.feature-bg {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  overflow: hidden;
   pointer-events: none;
 }
 
-.slide-bg img {
+.feature-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -144,69 +126,57 @@ a:hover {
   filter: saturate(0.85) brightness(0.5);
 }
 
-.slide-bg::after {
+.feature-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 38%, transparent, var(--bg) 82%),
-    linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 55%, var(--bg) 100%);
+    radial-gradient(ellipse 70% 55% at 50% 45%, transparent, var(--bg) 82%),
+    linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 60%, var(--bg) 100%);
 }
 
-.icon-row {
+.feature-body {
   position: relative;
-  grid-row: 1;
-  height: clamp(110px, 20vh, 240px);
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
 }
 
-.icon-slot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 100%;
+.feature-icon {
+  width: clamp(112px, 18vh, 168px);
   aspect-ratio: 1;
-  transform: translate3d(-50%, -50%, 0);
-}
-
-.icon-slot[data-gs-icon="1"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 62vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="2"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 124vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="3"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 186vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="4"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 248vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="5"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 310vw), -50%, 0);
-}
-
-.icon-visual {
-  position: absolute;
-  inset: 0;
+  margin: 0 auto 26px;
   border-radius: 24%;
   overflow: hidden;
   border: 1px solid var(--border-4);
-  box-shadow: 0 40px 90px -30px var(--shadow);
+  box-shadow: 0 24px 60px var(--shadow);
 }
 
-.game-icon-img {
+.feature-icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.feature h1 {
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.games-page.home-catalogue {
+  padding-top: 72px;
+}
+
+.catalogue-title {
+  font-size: clamp(26px, 3.4vw, 38px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0 0 28px;
 }
 
 .art-placeholder {
@@ -226,30 +196,6 @@ a:hover {
   line-height: 1.5;
 }
 
-.card-row {
-  position: relative;
-  z-index: 200;
-  grid-row: 2;
-  display: grid;
-  place-items: center;
-  padding: 16px var(--gutter) 0;
-}
-
-.game-card {
-  grid-area: 1 / 1;
-  width: 100%;
-  max-width: 640px;
-  border: 1px solid var(--border-3);
-  background: var(--card-bg);
-  padding: 18px 26px 16px;
-  text-align: center;
-}
-
-.game-card:not([data-gs-card="0"]) {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .card-eyebrow {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -257,14 +203,6 @@ a:hover {
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 10px;
-}
-
-.game-card h2 {
-  font-size: clamp(26px, 3vw, 42px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  margin: 0;
 }
 
 .card-pitch {
@@ -326,59 +264,6 @@ a:hover {
   font-size: 12px;
 }
 
-.stage-footer {
-  position: absolute;
-  left: var(--gutter);
-  right: var(--gutter);
-  /* Shifted up out of the consent banner's way while it's showing —
-     analytics.js sets --consent-offset to the banner's height. */
-  bottom: calc(26px + var(--consent-offset, 0px));
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 24px;
-  row-gap: 10px;
-}
-
-.stage-count,
-.stage-next {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: var(--muted-4);
-  white-space: nowrap;
-}
-
-.stage-next {
-  text-transform: uppercase;
-}
-
-.progress-track {
-  display: flex;
-  gap: 8px;
-  flex: 1;
-}
-
-.progress-bar {
-  flex: 1;
-  height: 2px;
-  background: var(--track-bg);
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-fill {
-  position: absolute;
-  inset: 0;
-  background: var(--accent);
-  transform-origin: left;
-  transform: scaleX(0);
-}
-
-.progress-bar:first-child .progress-fill {
-  transform: scaleX(1);
-}
-
 /* ---------- Small screens ---------- */
 
 @media (max-width: 640px) {
@@ -388,14 +273,6 @@ a:hover {
 
   .site-header {
     padding: 12px var(--gutter);
-  }
-
-  .games-stage {
-    padding: 48px 0 84px;
-  }
-
-  .game-card {
-    padding: 16px 18px 14px;
   }
 
   .card-links {
@@ -412,25 +289,6 @@ a:hover {
 
   .store-main {
     font-size: 10.5px;
-  }
-
-  .stage-footer {
-    bottom: calc(18px + var(--consent-offset, 0px));
-  }
-
-  /* Count and next-up share a line; the progress bar drops to its own
-     full-width line below rather than squeezing all three into one row. */
-  .stage-count {
-    order: 1;
-  }
-
-  .stage-next {
-    order: 2;
-  }
-
-  .progress-track {
-    order: 3;
-    flex-basis: 100%;
   }
 }
 
