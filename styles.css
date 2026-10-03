@@ -63,6 +63,10 @@ a:hover {
      rendering unstyled) grows this box instead of being clipped by it. */
   max-height: 54px;
   overflow: hidden;
+  /* Solid enough that page content scrolling underneath stays out of the way. */
+  background: oklch(0.15 0.012 265 / 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .logo {
@@ -112,40 +116,6 @@ a:hover {
   overflow: hidden;
 }
 
-.wall-bgs,
-.slide-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.slide-bg {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.slide-bg.is-active {
-  opacity: 1;
-}
-
-.slide-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(0.7) brightness(0.32) blur(2px);
-  transform: scale(1.03);
-}
-
-.slide-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 65% 50% at 50% 40%, transparent, var(--bg) 78%),
-    linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 55%, var(--bg) 100%);
-}
-
 .icon-wall {
   position: relative;
   width: 100%;
@@ -192,25 +162,6 @@ a:hover {
   outline-offset: 4px;
 }
 
-.has-selection .wall-icon {
-  opacity: 0.4;
-  filter: saturate(0.5);
-}
-
-.has-selection .wall-icon[aria-pressed="true"] {
-  opacity: 1;
-  filter: none;
-  border-color: var(--accent);
-  transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
-  animation: none;
-  z-index: 3;
-}
-
-.has-selection .wall-icon:hover {
-  opacity: 1;
-  filter: none;
-}
-
 @keyframes wall-float {
   0%, 100% { translate: 0 0; }
   50% { translate: 0 -10px; }
@@ -231,26 +182,22 @@ a:hover {
   text-align: center;
 }
 
-.wall-intro,
-.game-detail {
-  grid-area: 1 / 1;
+.wall-intro {
   border: 1px solid var(--border-3);
   background: var(--card-bg);
   padding: 20px 26px 18px;
 }
 
-.wall-intro[hidden],
-.game-detail[hidden] {
-  display: none;
-}
-
-.wall-intro h1,
-.game-detail h2 {
+.wall-intro h1 {
   font-size: clamp(26px, 3vw, 40px);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 700;
   margin: 0;
+}
+
+.store-btn.wall-cta {
+  flex: 0 1 260px;
 }
 
 /* ---------- Menu ---------- */
@@ -820,6 +767,14 @@ a:hover {
 /* Same specificity as .game-tile's own "display: flex", so without this the
    [hidden] attribute the filter script sets has no visual effect at all —
    .game-tile's rule wins the cascade just by coming later in the file. */
+.game-tile {
+  scroll-margin-top: 80px;
+}
+
+.game-tile:target {
+  border-color: var(--accent);
+}
+
 .game-tile[hidden] {
   display: none;
 }
