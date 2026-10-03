@@ -1,129 +1,96 @@
+// Site menu (every page).
 (function () {
-  var TITLES = ["Tide Runner", "Color Match & Merge", "Color Block Fall", "Color Flood", "Needle In A Haystack", "Border Hopper"];
-  var TRAVEL = 62; // vw of horizontal travel per game
-  var RISE = 30;   // vh it climbs on the way in
-  var SPIN = 8;    // deg of tilt
+  var toggle = document.querySelector(".menu-toggle");
+  var menu = document.getElementById("site-menu");
+  if (!toggle || !menu) return;
 
-  var track = document.getElementById("games");
-  var stage = track && track.firstElementChild;
-  var icons = document.querySelectorAll("[data-gs-icon]");
-  var cards = document.querySelectorAll("[data-gs-card]");
-  var bgs = document.querySelectorAll("[data-gs-bg]");
-  var fills = document.querySelectorAll("[data-gs-fill]");
-  var countEl = document.getElementById("gs-count");
-  var nextEl = document.getElementById("gs-next");
-
-  function pad(v) {
-    return v < 10 ? "0" + v : "" + v;
-  }
-
-  function signed(v, unit) {
-    return (v < 0 ? " - " + Math.abs(v).toFixed(2) : " + " + v.toFixed(2)) + unit;
-  }
-
-  function frame() {
-    if (!track || !stage) return;
-
-    var rect = track.getBoundingClientRect();
-    // Measure the sticky stage's own rendered height rather than the
-    // viewport independently — on mobile browsers with a dynamic
-    // address bar, the two can briefly disagree (the stage is sized with
-    // svh, which holds steady, while window/documentElement dimensions
-    // shift as the bar hides/shows), which left the last icon just
-    // short of dead-centre at the bottom of the page.
-    var vh = stage.getBoundingClientRect().height || document.documentElement.clientHeight || window.innerHeight;
-    var span = rect.height - vh;
-    if (span <= 0) return;
-
-    var progress = Math.max(0, Math.min(1, -rect.top / span));
-    // Snap to the ends once the page itself can't scroll any further, so
-    // sub-pixel rounding never leaves the first/last icon barely off-centre.
-    var doc = document.documentElement;
-    var atTop = window.scrollY <= 0;
-    var atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 1;
-    if (atTop) progress = 0;
-    else if (atBottom) progress = 1;
-    var n = TITLES.length;
-    var pos = progress * (n - 1);
-    var current = Math.round(pos);
-
-    for (var i = 0; i < icons.length; i++) {
-      var icon = icons[i];
-      var idx = Number(icon.getAttribute("data-gs-icon"));
-      var d = idx - pos;
-      var a = Math.min(1, Math.abs(d));
-      icon.style.transform =
-        "translate3d(calc(-50%" + signed(-d * TRAVEL, "vw") + "), calc(-50%" +
-        signed(d * RISE, "vh") + "), 0) scale(" + (1 - a * 0.22).toFixed(3) +
-        ") rotate(" + (d * SPIN).toFixed(2) + "deg)";
-      icon.style.opacity = a < 0.999 ? (1 - a * a * 0.85).toFixed(3) : "0";
-      icon.style.zIndex = String(100 - Math.round(a * 90));
-    }
-
-    for (var j = 0; j < cards.length; j++) {
-      var card = cards[j];
-      var cd = Number(card.getAttribute("data-gs-card")) - pos;
-      var ca = Math.min(1, Math.abs(cd));
-      card.style.opacity = Math.max(0, 1 - ca * 1.9).toFixed(3);
-      card.style.transform = "translate3d(0, " + (cd * 40).toFixed(1) + "px, 0)";
-      card.style.pointerEvents = ca < 0.35 ? "auto" : "none";
-    }
-
-    for (var g = 0; g < bgs.length; g++) {
-      var bgEl = bgs[g];
-      var bd = Number(bgEl.getAttribute("data-gs-bg")) - pos;
-      var ba = Math.min(1, Math.abs(bd));
-      bgEl.style.opacity = Math.max(0, 1 - ba * 1.9).toFixed(3);
-    }
-
-    for (var f = 0; f < fills.length; f++) {
-      var fill = fills[f];
-      var fi = Number(fill.getAttribute("data-gs-fill"));
-      // Each bar fills once, monotonically, as pos sweeps past it — no
-      // dependency on the rounded "current" index, so there's no point
-      // where a bar has to un-fill before the next one takes over.
-      var value = Math.max(0, Math.min(1, pos - fi + 1));
-      fill.style.transform = "scaleX(" + value.toFixed(3) + ")";
-    }
-
-    if (countEl) countEl.textContent = pad(current + 1);
-    if (nextEl) {
-      nextEl.textContent = current >= n - 1 ? "End of catalogue" : "Next — " + TITLES[current + 1];
+  function setOpen(open) {
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.documentElement.classList.toggle("menu-open", open);
+    if (open) {
+      var first = menu.querySelector("a, button");
+      if (first) first.focus();
+    } else {
+      toggle.focus();
     }
   }
 
-  // Once scrolling settles, ease the rest of the way to whichever game is
-  // nearest, so the carousel never rests half-transitioned between two icons.
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var snapTimer = null;
+  toggle.addEventListener("click", function () {
+    setOpen(menu.hidden);
+  });
 
-  function snapToNearest() {
-    if (!track || !stage) return;
-    var rect = track.getBoundingClientRect();
-    var vh = stage.getBoundingClientRect().height || document.documentElement.clientHeight || window.innerHeight;
-    var span = rect.height - vh;
-    if (span <= 0) return;
+  menu.addEventListener("click", function (e) {
+    var target = e.target;
+    if (target.closest("[data-menu-close]") || target.closest("a")) setOpen(false);
+  });
 
-    var progress = -rect.top / span;
-    if (progress <= 0 || progress >= 1) return; // already resting at an end
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !menu.hidden) setOpen(false);
+  });
+})();
 
-    var n = TITLES.length;
-    var targetProgress = Math.round(progress * (n - 1)) / (n - 1);
-    var delta = (targetProgress - progress) * span;
-    if (Math.abs(delta) < 1) return;
-    window.scrollTo({ top: window.scrollY + delta, behavior: reduceMotion ? "auto" : "smooth" });
+// Homepage icon wall: tap an icon to bring up that game.
+(function () {
+  var icons = document.querySelectorAll(".wall-icon");
+  if (!icons.length) return;
+  var intro = document.getElementById("wall-intro");
+  var details = document.querySelectorAll(".game-detail");
+  var bgs = document.querySelectorAll("[data-bg]");
+  var stage = document.querySelector(".wall-stage");
+
+  function select(id) {
+    var found = false;
+    for (var i = 0; i < details.length; i++) {
+      var match = details[i].id === id;
+      details[i].hidden = !match;
+      if (match) found = true;
+    }
+    if (!found) id = null;
+    if (intro) intro.hidden = !!id;
+    for (var j = 0; j < icons.length; j++) {
+      icons[j].setAttribute("aria-pressed", icons[j].getAttribute("data-game") === id ? "true" : "false");
+    }
+    for (var k = 0; k < bgs.length; k++) {
+      bgs[k].classList.toggle("is-active", bgs[k].getAttribute("data-bg") === id);
+    }
+    if (stage) stage.classList.toggle("has-selection", !!id);
   }
 
-  function onScroll() {
-    frame();
-    clearTimeout(snapTimer);
-    snapTimer = setTimeout(snapToNearest, 300);
+  for (var i = 0; i < icons.length; i++) {
+    icons[i].addEventListener("click", function (e) {
+      var id = e.currentTarget.getAttribute("data-game");
+      var already = e.currentTarget.getAttribute("aria-pressed") === "true";
+      // Tapping the selected game again goes back to the intro.
+      history.replaceState(null, "", already ? location.pathname : "#" + id);
+      select(already ? null : id);
+    });
   }
 
-  // Timer-driven in addition to scroll/resize so the motion stays smooth
-  // even in contexts that throttle rAF/scroll events (e.g. background tabs).
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", frame);
-  setInterval(frame, 40);
-  frame();
+  // Menu links point at /#game-id, so honour the hash on load and on change.
+  function fromHash() {
+    select(location.hash.slice(1) || null);
+  }
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+})();
+
+// Category filter for the games page grid.
+(function () {
+  var tabs = document.querySelectorAll(".category-tab");
+  var tiles = document.querySelectorAll(".game-tile");
+
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener("click", function (e) {
+      var tab = e.currentTarget;
+      var category = tab.getAttribute("data-category");
+      for (var t = 0; t < tabs.length; t++) {
+        tabs[t].setAttribute("aria-pressed", tabs[t] === tab ? "true" : "false");
+      }
+      for (var g = 0; g < tiles.length; g++) {
+        var show = category === "all" || tiles[g].getAttribute("data-category") === category;
+        tiles[g].hidden = !show;
+      }
+    });
+  }
 })();

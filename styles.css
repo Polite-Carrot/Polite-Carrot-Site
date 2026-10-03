@@ -100,40 +100,32 @@ a:hover {
   color: var(--accent);
 }
 
-/* ---------- Games carousel ---------- */
+/* ---------- Homepage icon wall ---------- */
 
-.games-track {
+.wall-stage {
   position: relative;
-  /* No top margin: the sticky stage below starts flush with the document
-     so it's fully within the viewport (and thus fully visible, footer
-     included) from the very first pixel of scroll. A margin here used to
-     push the stage's bottom edge below the fold until you'd scrolled past
-     it, hiding the counter/progress row at rest. Header clearance is
-     handled by the stage's own top padding instead. */
-  /* 100vh viewport + 112.5vh per transition, for 6 games (5 transitions). */
-  height: 662.5vh;
-  height: 662.5svh;
-}
-
-.games-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
-  overflow: hidden;
-  border-top: 1px solid var(--border-1);
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
-  grid-template-rows: auto auto;
-  align-content: center;
-  padding: 56px 0 48px;
+  grid-template-rows: 1fr auto;
+  padding: 64px var(--gutter) 40px;
+  overflow: hidden;
 }
 
+.wall-bgs,
 .slide-bg {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  overflow: hidden;
   pointer-events: none;
+}
+
+.slide-bg {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slide-bg.is-active {
+  opacity: 1;
 }
 
 .slide-bg img {
@@ -141,7 +133,8 @@ a:hover {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: saturate(0.85) brightness(0.5);
+  filter: saturate(0.7) brightness(0.32) blur(2px);
+  transform: scale(1.03);
 }
 
 .slide-bg::after {
@@ -149,64 +142,281 @@ a:hover {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 38%, transparent, var(--bg) 82%),
+    radial-gradient(ellipse 65% 50% at 50% 40%, transparent, var(--bg) 78%),
     linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 55%, var(--bg) 100%);
 }
 
-.icon-row {
+.icon-wall {
   position: relative;
-  grid-row: 1;
-  height: clamp(110px, 20vh, 240px);
+  width: 100%;
+  max-width: 900px;
+  min-height: 300px;
+  margin: 0 auto;
 }
 
-.icon-slot {
+.wall-icon {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 100%;
+  left: var(--x);
+  top: var(--y);
+  width: calc(clamp(84px, 14vmin, 150px) * var(--s));
   aspect-ratio: 1;
-  transform: translate3d(-50%, -50%, 0);
-}
-
-.icon-slot[data-gs-icon="1"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 62vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="2"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 124vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="3"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 186vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="4"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 248vw), -50%, 0);
-}
-
-.icon-slot[data-gs-icon="5"] {
-  opacity: 0;
-  transform: translate3d(calc(-50% - 310vw), -50%, 0);
-}
-
-.icon-visual {
-  position: absolute;
-  inset: 0;
+  padding: 0;
+  border: 1px solid var(--border-4);
   border-radius: 24%;
   overflow: hidden;
-  border: 1px solid var(--border-4);
-  box-shadow: 0 40px 90px -30px var(--shadow);
+  background: none;
+  cursor: pointer;
+  box-shadow: 0 18px 44px var(--shadow);
+  transform: translate(-50%, -50%) rotate(var(--r));
+  transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease, border-color 0.2s;
+  animation: wall-float 6s ease-in-out infinite;
+  animation-delay: var(--d);
 }
 
-.game-icon-img {
+.wall-icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.wall-icon:hover,
+.wall-icon:focus-visible {
+  border-color: var(--accent);
+  transform: translate(-50%, -50%) rotate(0deg) scale(1.08);
+  z-index: 2;
+}
+
+.wall-icon:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.has-selection .wall-icon {
+  opacity: 0.4;
+  filter: saturate(0.5);
+}
+
+.has-selection .wall-icon[aria-pressed="true"] {
+  opacity: 1;
+  filter: none;
+  border-color: var(--accent);
+  transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
+  animation: none;
+  z-index: 3;
+}
+
+.has-selection .wall-icon:hover {
+  opacity: 1;
+  filter: none;
+}
+
+@keyframes wall-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wall-icon {
+    animation: none;
+  }
+}
+
+.wall-info {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wall-intro,
+.game-detail {
+  grid-area: 1 / 1;
+  border: 1px solid var(--border-3);
+  background: var(--card-bg);
+  padding: 20px 26px 18px;
+}
+
+.wall-intro[hidden],
+.game-detail[hidden] {
+  display: none;
+}
+
+.wall-intro h1,
+.game-detail h2 {
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ---------- Menu ---------- */
+
+.menu-toggle {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border: none;
+  background: none;
+  color: var(--fg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  color: var(--accent);
+}
+
+.menu-toggle-bars,
+.menu-toggle-bars::before {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+}
+
+.menu-toggle-bars {
+  position: relative;
+  transform: translateY(-3px);
+}
+
+.menu-toggle-bars::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background: oklch(0.05 0.02 265 / 0.6);
+}
+
+.menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(360px, 100%);
+  overflow-y: auto;
+  background: var(--bg);
+  border-left: 1px solid var(--border-3);
+  padding: 22px var(--gutter) 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-close {
+  align-self: flex-end;
+  margin-bottom: 28px;
+  padding: 6px 0;
+  border: none;
+  background: none;
+  color: var(--muted-3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-close:hover {
+  color: var(--accent);
+}
+
+.menu-games,
+.menu-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-games a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+  color: var(--fg);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.menu-games a:hover {
+  color: var(--accent);
+}
+
+.menu-games img {
+  width: 40px;
+  height: 40px;
+  border-radius: 24%;
+  border: 1px solid var(--border-4);
+  object-fit: cover;
+}
+
+.menu-all {
+  margin: 12px 0 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.menu-links {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-1);
+}
+
+.menu-links a {
+  display: block;
+  padding: 8px 0;
+  color: var(--fg);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.menu-links a:hover {
+  color: var(--accent);
+}
+
+.menu-open {
+  overflow: hidden;
+}
+
+/* ---------- Contact ---------- */
+
+.contact-email {
+  display: inline-grid;
+  margin: 8px 0 24px;
+  padding: 14px 22px;
+  text-decoration: none !important;
+}
+
+.contact-email .store-main {
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0.04em;
 }
 
 .art-placeholder {
@@ -226,30 +436,6 @@ a:hover {
   line-height: 1.5;
 }
 
-.card-row {
-  position: relative;
-  z-index: 200;
-  grid-row: 2;
-  display: grid;
-  place-items: center;
-  padding: 16px var(--gutter) 0;
-}
-
-.game-card {
-  grid-area: 1 / 1;
-  width: 100%;
-  max-width: 640px;
-  border: 1px solid var(--border-3);
-  background: var(--card-bg);
-  padding: 18px 26px 16px;
-  text-align: center;
-}
-
-.game-card:not([data-gs-card="0"]) {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .card-eyebrow {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -257,14 +443,6 @@ a:hover {
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 10px;
-}
-
-.game-card h2 {
-  font-size: clamp(26px, 3vw, 42px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  margin: 0;
 }
 
 .card-pitch {
@@ -326,59 +504,6 @@ a:hover {
   font-size: 12px;
 }
 
-.stage-footer {
-  position: absolute;
-  left: var(--gutter);
-  right: var(--gutter);
-  /* Shifted up out of the consent banner's way while it's showing —
-     analytics.js sets --consent-offset to the banner's height. */
-  bottom: calc(26px + var(--consent-offset, 0px));
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 24px;
-  row-gap: 10px;
-}
-
-.stage-count,
-.stage-next {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: var(--muted-4);
-  white-space: nowrap;
-}
-
-.stage-next {
-  text-transform: uppercase;
-}
-
-.progress-track {
-  display: flex;
-  gap: 8px;
-  flex: 1;
-}
-
-.progress-bar {
-  flex: 1;
-  height: 2px;
-  background: var(--track-bg);
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-fill {
-  position: absolute;
-  inset: 0;
-  background: var(--accent);
-  transform-origin: left;
-  transform: scaleX(0);
-}
-
-.progress-bar:first-child .progress-fill {
-  transform: scaleX(1);
-}
-
 /* ---------- Small screens ---------- */
 
 @media (max-width: 640px) {
@@ -388,14 +513,6 @@ a:hover {
 
   .site-header {
     padding: 12px var(--gutter);
-  }
-
-  .games-stage {
-    padding: 48px 0 84px;
-  }
-
-  .game-card {
-    padding: 16px 18px 14px;
   }
 
   .card-links {
@@ -414,23 +531,16 @@ a:hover {
     font-size: 10.5px;
   }
 
-  .stage-footer {
-    bottom: calc(18px + var(--consent-offset, 0px));
+  .wall-stage {
+    padding-top: 56px;
   }
 
-  /* Count and next-up share a line; the progress bar drops to its own
-     full-width line below rather than squeezing all three into one row. */
-  .stage-count {
-    order: 1;
-  }
-
-  .stage-next {
-    order: 2;
-  }
-
-  .progress-track {
-    order: 3;
-    flex-basis: 100%;
+  /* Two staggered columns on phones so the cluster stays loose without
+     icons crowding into each other. */
+  .wall-icon {
+    width: calc(26vw * var(--s));
+    left: var(--mx);
+    top: var(--my);
   }
 }
 
