@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=21" />
+<link rel="stylesheet" href="styles.css?v=23" />
 <script src="analytics.js?v=2"></script>
 </head>
 <body>
@@ -33,12 +33,12 @@
     <button type="button" class="menu-close" data-menu-close aria-label="Close menu">Close</button>
     <p class="card-eyebrow">Games</p>
     <ul class="menu-games">
-      <li><a href="/#tide-runner"><img src="/assets/tide-runner-icon.png" alt="" />Tide Runner</a></li>
-      <li><a href="/#color-match-merge"><img src="/assets/colour-jars-icon.png" alt="" />Color Match &amp; Merge</a></li>
-      <li><a href="/#color-block-fall"><img src="/assets/color-block-fall-icon.png" alt="" />Color Block Fall</a></li>
-      <li><a href="/#color-flood"><img src="/assets/color-flood-icon.png" alt="" />Color Flood</a></li>
-      <li><a href="/#needle-in-a-haystack"><img src="/assets/needle-in-a-haystack-icon.png" alt="" />Needle In A Haystack</a></li>
-      <li><a href="/#border-hopper"><img src="/assets/border-hopper-icon.png" alt="" />Border Hopper</a></li>
+      <li><a href="/games/#tide-runner"><img src="/assets/tide-runner-icon.png" alt="" />Tide Runner</a></li>
+      <li><a href="/games/#color-match-merge"><img src="/assets/colour-jars-icon.png" alt="" />Color Match &amp; Merge</a></li>
+      <li><a href="/games/#color-block-fall"><img src="/assets/color-block-fall-icon.png" alt="" />Color Block Fall</a></li>
+      <li><a href="/games/#color-flood"><img src="/assets/color-flood-icon.png" alt="" />Color Flood</a></li>
+      <li><a href="/games/#needle-in-a-haystack"><img src="/assets/needle-in-a-haystack-icon.png" alt="" />Needle In A Haystack</a></li>
+      <li><a href="/games/#border-hopper"><img src="/assets/border-hopper-icon.png" alt="" />Border Hopper</a></li>
     </ul>
     <a href="/games/" class="menu-all">All games →</a>
     <ul class="menu-links">
@@ -49,106 +49,102 @@
 </div>
 
 <main class="wall-stage">
-  <div class="wall-bgs">
-    <div class="slide-bg" data-bg="tide-runner">
-      <img src="assets/tide-runner-bg.jpg" alt="" />
+  <div class="icon-flow" aria-label="Our games">
+    <div class="flow-lane" style="--dur: 70s; --size: 128px">
+      <div class="flow-track">
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -6deg; --d: -0.0s"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -0.9s"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -3deg; --d: -1.8s"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 7deg; --d: -2.7s"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.6s"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -4.5s"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -6deg; --d: -0.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -0.9s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -3deg; --d: -1.8s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 7deg; --d: -2.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.6s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -4.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -6deg; --d: -0.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -0.9s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -3deg; --d: -1.8s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 7deg; --d: -2.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.6s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -4.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -6deg; --d: -0.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -0.9s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -3deg; --d: -1.8s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 7deg; --d: -2.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.6s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -4.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+      </div>
     </div>
-    <div class="slide-bg" data-bg="color-match-merge">
-      <img src="assets/colour-jars-bg.jpg" alt="" />
+    <div class="flow-lane lane-reverse" style="--dur: 85s; --size: 104px">
+      <div class="flow-track">
+        <a href="games/#color-flood" class="flow-icon" style="--r: 4deg; --d: -0.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: -3deg; --d: -1.3s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 7deg; --d: -2.2s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.1s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: 3deg; --d: -4.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -6deg; --d: -4.9s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 4deg; --d: -0.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: -3deg; --d: -1.3s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 7deg; --d: -2.2s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.1s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: 3deg; --d: -4.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -6deg; --d: -4.9s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 4deg; --d: -0.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: -3deg; --d: -1.3s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 7deg; --d: -2.2s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.1s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: 3deg; --d: -4.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -6deg; --d: -4.9s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: 4deg; --d: -0.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: -3deg; --d: -1.3s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 7deg; --d: -2.2s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -5deg; --d: -3.1s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: 3deg; --d: -4.0s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: -6deg; --d: -4.9s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+      </div>
     </div>
-    <div class="slide-bg" data-bg="color-block-fall">
-      <img src="assets/color-block-fall-bg.jpg" alt="" />
-    </div>
-    <div class="slide-bg" data-bg="color-flood">
-      <img src="assets/color-flood-bg.jpg" alt="" />
-    </div>
-    <div class="slide-bg" data-bg="needle-in-a-haystack">
-      <img src="assets/needle-in-a-haystack-bg.jpg" alt="" />
-    </div>
-    <div class="slide-bg" data-bg="border-hopper">
-      <img src="assets/border-hopper-bg.jpg" alt="" />
+    <div class="flow-lane" style="--dur: 60s; --size: 140px">
+      <div class="flow-track">
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -3deg; --d: -0.8s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: 7deg; --d: -1.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -5deg; --d: -2.6s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -3.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: -6deg; --d: -4.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -5.3s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -3deg; --d: -0.8s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: 7deg; --d: -1.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -5deg; --d: -2.6s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -3.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: -6deg; --d: -4.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -5.3s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -3deg; --d: -0.8s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: 7deg; --d: -1.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -5deg; --d: -2.6s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -3.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: -6deg; --d: -4.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -5.3s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+        <a href="games/#needle-in-a-haystack" class="flow-icon" style="--r: -3deg; --d: -0.8s" tabindex="-1" aria-hidden="true"><img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" /></a>
+        <a href="games/#color-block-fall" class="flow-icon" style="--r: 7deg; --d: -1.7s" tabindex="-1" aria-hidden="true"><img src="assets/color-block-fall-icon.png" alt="Color Block Fall" /></a>
+        <a href="games/#tide-runner" class="flow-icon" style="--r: -5deg; --d: -2.6s" tabindex="-1" aria-hidden="true"><img src="assets/tide-runner-icon.png" alt="Tide Runner" /></a>
+        <a href="games/#border-hopper" class="flow-icon" style="--r: 3deg; --d: -3.5s" tabindex="-1" aria-hidden="true"><img src="assets/border-hopper-icon.png" alt="Border Hopper" /></a>
+        <a href="games/#color-flood" class="flow-icon" style="--r: -6deg; --d: -4.4s" tabindex="-1" aria-hidden="true"><img src="assets/color-flood-icon.png" alt="Color Flood" /></a>
+        <a href="games/#color-match-merge" class="flow-icon" style="--r: 4deg; --d: -5.3s" tabindex="-1" aria-hidden="true"><img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" /></a>
+      </div>
     </div>
   </div>
 
-  <div class="icon-wall" role="group" aria-label="Our games">
-      <button type="button" class="wall-icon" data-game="tide-runner" aria-pressed="false" style="--x: 20%; --y: 30%; --s: 1.1; --r: -8deg; --d: -0.0s; --mx: 28%; --my: 12%">
-        <img src="assets/tide-runner-icon.png" alt="Tide Runner" />
-      </button>
-      <button type="button" class="wall-icon" data-game="color-match-merge" aria-pressed="false" style="--x: 50%; --y: 20%; --s: 0.95; --r: 5deg; --d: -1.3s; --mx: 72%; --my: 24%">
-        <img src="assets/colour-jars-icon.png" alt="Color Match &amp; Merge" />
-      </button>
-      <button type="button" class="wall-icon" data-game="color-block-fall" aria-pressed="false" style="--x: 80%; --y: 32%; --s: 1.05; --r: 9deg; --d: -2.6s; --mx: 28%; --my: 45%">
-        <img src="assets/color-block-fall-icon.png" alt="Color Block Fall" />
-      </button>
-      <button type="button" class="wall-icon" data-game="color-flood" aria-pressed="false" style="--x: 27%; --y: 72%; --s: 0.9; --r: 6deg; --d: -3.9s; --mx: 72%; --my: 56%">
-        <img src="assets/color-flood-icon.png" alt="Color Flood" />
-      </button>
-      <button type="button" class="wall-icon" data-game="needle-in-a-haystack" aria-pressed="false" style="--x: 54%; --y: 64%; --s: 1.15; --r: -5deg; --d: -5.2s; --mx: 28%; --my: 80%">
-        <img src="assets/needle-in-a-haystack-icon.png" alt="Needle In A Haystack" />
-      </button>
-      <button type="button" class="wall-icon" data-game="border-hopper" aria-pressed="false" style="--x: 80%; --y: 74%; --s: 1; --r: -9deg; --d: -6.5s; --mx: 72%; --my: 89%">
-        <img src="assets/border-hopper-icon.png" alt="Border Hopper" />
-      </button>
-  </div>
-
-  <div class="wall-info" aria-live="polite">
-    <div class="wall-intro" id="wall-intro">
+  <div class="wall-info">
+    <div class="wall-intro">
       <p class="card-eyebrow">Pocket-sized games</p>
       <h1>Pick a game, any game.</h1>
-      <p class="card-pitch">Puzzle, racing, and simulation games for iOS, Android, and straight in the browser. Tap an icon to find out more.</p>
+      <p class="card-pitch">Puzzle, racing, and simulation games for iOS, Android, and straight in the browser.</p>
+      <div class="card-links">
+        <a href="games/" class="store-btn store-btn-primary wall-cta"><span class="store-sub">Browse</span><span class="store-main">View all our games</span></a>
+      </div>
     </div>
-    <article class="game-detail" id="tide-runner" hidden>
-      <p class="card-eyebrow">Racing — Out now</p>
-      <h2>Tide Runner</h2>
-      <p class="card-pitch">Race, unlock, repeat. New maps, new boats, and difficulty that bites back.</p>
-      <div class="card-links">
-        <a href="https://polite-carrot.github.io/Tide-Runner/" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-        <a href="https://apps.apple.com/gb/app/tide-runner/id6804190722" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">App Store</span></a>
-        <a href="https://play.google.com/store/apps/details?id=com.politecarrot.tiderunner" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">Play Store</span></a>
-      </div>
-    </article>
-    <article class="game-detail" id="color-match-merge" hidden>
-      <p class="card-eyebrow">Puzzle — Out now</p>
-      <h2>Color Match &amp; Merge</h2>
-      <p class="card-pitch">Pour and sort the colours until every pot is pure. Relaxing, endlessly tricky.</p>
-      <div class="card-links">
-        <a href="https://polite-carrot.github.io/color-sorting/" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-        <a href="https://apps.apple.com/gb/app/color-match-merge/id6805944228" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">App Store</span></a>
-        <a href="https://play.google.com/store/apps/details?id=com.politecarrot.colorjars" target="_blank" rel="noopener" class="store-btn"><span class="store-sub">Download on</span><span class="store-main">Play Store</span></a>
-      </div>
-    </article>
-    <article class="game-detail" id="color-block-fall" hidden>
-      <p class="card-eyebrow">Puzzle — Out now</p>
-      <h2>Color Block Fall</h2>
-      <p class="card-pitch">Drop, stack, and solve! Place falling blocks strategically, build your perfect stack, and keep the board clear in this addictive puzzle challenge.</p>
-      <div class="card-links">
-        <a href="https://colorblockfall.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-      </div>
-    </article>
-    <article class="game-detail" id="color-flood" hidden>
-      <p class="card-eyebrow">Puzzle — Out now</p>
-      <h2>Color Flood</h2>
-      <p class="card-pitch">Flood the board with one colour in as few moves as you can.</p>
-      <div class="card-links">
-        <a href="https://colorflood.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-      </div>
-    </article>
-    <article class="game-detail" id="needle-in-a-haystack" hidden>
-      <p class="card-eyebrow">Simulation — Out now</p>
-      <h2>Needle In A Haystack</h2>
-      <p class="card-pitch">Search a barn full of hay for a single needle. Dig, sift, and upgrade your way deeper.</p>
-      <div class="card-links">
-        <a href="https://needleinahaystack.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-      </div>
-    </article>
-    <article class="game-detail" id="border-hopper" hidden>
-      <p class="card-eyebrow">Puzzle — Out now</p>
-      <h2>Border Hopper</h2>
-      <p class="card-pitch">Cross the world one land border at a time. Real geography, 250 levels, fewest moves wins.</p>
-      <div class="card-links">
-        <a href="https://borderhopper.politecarrot.com" target="_blank" rel="noopener" class="store-btn store-btn-primary"><span class="store-sub">No install</span><span class="store-main">Play on Web</span></a>
-      </div>
-    </article>
   </div>
 </main>
 
@@ -164,6 +160,6 @@
   </nav>
 </footer>
 
-<script src="script.js?v=16"></script>
+<script src="script.js?v=17"></script>
 </body>
 </html>

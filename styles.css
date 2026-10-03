@@ -63,6 +63,10 @@ a:hover {
      rendering unstyled) grows this box instead of being clipped by it. */
   max-height: 54px;
   overflow: hidden;
+  /* Solid enough that page content scrolling underneath stays out of the way. */
+  background: oklch(0.15 0.012 265 / 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .logo {
@@ -107,117 +111,102 @@ a:hover {
   min-height: 100vh;
   min-height: 100svh;
   display: grid;
+  /* minmax(0, 1fr) stops the very wide icon rows from stretching the
+     column (and pushing the text box off-screen). */
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 1fr auto;
   padding: 64px var(--gutter) 40px;
   overflow: hidden;
 }
 
-.wall-bgs,
-.slide-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+.icon-flow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(18px, 3vh, 34px);
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 12px 0 28px;
+  /* Icons fade in and out at the screen edges rather than being cut off. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
-.slide-bg {
-  opacity: 0;
-  transition: opacity 0.5s ease;
+.flow-lane {
+  overflow: hidden;
+  padding: 14px 0;
 }
 
-.slide-bg.is-active {
-  opacity: 1;
+.flow-track {
+  display: flex;
+  gap: calc(var(--size) * 0.45);
+  width: max-content;
+  animation: flow-left var(--dur) linear infinite;
 }
 
-.slide-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(0.7) brightness(0.32) blur(2px);
-  transform: scale(1.03);
+.lane-reverse .flow-track {
+  animation-name: flow-right;
 }
 
-.slide-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 65% 50% at 50% 40%, transparent, var(--bg) 78%),
-    linear-gradient(180deg, var(--bg) 0%, transparent 22%, transparent 55%, var(--bg) 100%);
+/* Hovering a row pauses it so an icon is easy to click. */
+.flow-lane:hover .flow-track,
+.flow-lane:focus-within .flow-track,
+.flow-lane:hover .flow-icon,
+.flow-lane:focus-within .flow-icon {
+  animation-play-state: paused;
 }
 
-.icon-wall {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  min-height: 300px;
-  margin: 0 auto;
-}
-
-.wall-icon {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: calc(clamp(84px, 14vmin, 150px) * var(--s));
+.flow-icon {
+  flex: none;
+  width: var(--size);
   aspect-ratio: 1;
-  padding: 0;
   border: 1px solid var(--border-4);
   border-radius: 24%;
   overflow: hidden;
-  background: none;
-  cursor: pointer;
-  box-shadow: 0 18px 44px var(--shadow);
-  transform: translate(-50%, -50%) rotate(var(--r));
-  transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease, border-color 0.2s;
-  animation: wall-float 6s ease-in-out infinite;
+  box-shadow: 0 14px 34px var(--shadow);
+  transform: rotate(var(--r));
+  transition: transform 0.3s ease, border-color 0.2s;
+  animation: flow-bob 5s ease-in-out infinite;
   animation-delay: var(--d);
 }
 
-.wall-icon img {
+.flow-icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.wall-icon:hover,
-.wall-icon:focus-visible {
+.flow-icon:hover,
+.flow-icon:focus-visible {
   border-color: var(--accent);
-  transform: translate(-50%, -50%) rotate(0deg) scale(1.08);
-  z-index: 2;
+  transform: rotate(0deg) scale(1.08);
 }
 
-.wall-icon:focus-visible {
+.flow-icon:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
-.has-selection .wall-icon {
-  opacity: 0.4;
-  filter: saturate(0.5);
+/* The track holds four copies of the row, so sliding it by half lands
+   exactly where it started and the loop is seamless. */
+@keyframes flow-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-.has-selection .wall-icon[aria-pressed="true"] {
-  opacity: 1;
-  filter: none;
-  border-color: var(--accent);
-  transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
-  animation: none;
-  z-index: 3;
+@keyframes flow-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 
-.has-selection .wall-icon:hover {
-  opacity: 1;
-  filter: none;
-}
-
-@keyframes wall-float {
+@keyframes flow-bob {
   0%, 100% { translate: 0 0; }
-  50% { translate: 0 -10px; }
+  50% { translate: 0 -8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wall-icon {
+  .flow-track,
+  .flow-icon {
     animation: none;
   }
 }
@@ -231,26 +220,22 @@ a:hover {
   text-align: center;
 }
 
-.wall-intro,
-.game-detail {
-  grid-area: 1 / 1;
+.wall-intro {
   border: 1px solid var(--border-3);
   background: var(--card-bg);
   padding: 20px 26px 18px;
 }
 
-.wall-intro[hidden],
-.game-detail[hidden] {
-  display: none;
-}
-
-.wall-intro h1,
-.game-detail h2 {
+.wall-intro h1 {
   font-size: clamp(26px, 3vw, 40px);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 700;
   margin: 0;
+}
+
+.store-btn.wall-cta {
+  flex: 0 1 260px;
 }
 
 /* ---------- Menu ---------- */
@@ -535,12 +520,8 @@ a:hover {
     padding-top: 56px;
   }
 
-  /* Two staggered columns on phones so the cluster stays loose without
-     icons crowding into each other. */
-  .wall-icon {
-    width: calc(26vw * var(--s));
-    left: var(--mx);
-    top: var(--my);
+  .flow-lane {
+    --size: 84px !important;
   }
 }
 
@@ -820,6 +801,14 @@ a:hover {
 /* Same specificity as .game-tile's own "display: flex", so without this the
    [hidden] attribute the filter script sets has no visual effect at all —
    .game-tile's rule wins the cascade just by coming later in the file. */
+.game-tile {
+  scroll-margin-top: 80px;
+}
+
+.game-tile:target {
+  border-color: var(--accent);
+}
+
 .game-tile[hidden] {
   display: none;
 }
