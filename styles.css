@@ -147,14 +147,6 @@ a:hover {
   animation-name: flow-right;
 }
 
-/* Hovering a row pauses it so an icon is easy to click. */
-.flow-lane:hover .flow-track,
-.flow-lane:focus-within .flow-track,
-.flow-lane:hover .flow-icon,
-.flow-lane:focus-within .flow-icon {
-  animation-play-state: paused;
-}
-
 .flow-icon {
   flex: none;
   width: var(--size);
@@ -164,7 +156,6 @@ a:hover {
   overflow: hidden;
   box-shadow: 0 14px 34px var(--shadow);
   transform: rotate(var(--r));
-  transition: transform 0.3s ease, border-color 0.2s;
   animation: flow-bob 5s ease-in-out infinite;
   animation-delay: var(--d);
 }
@@ -174,17 +165,6 @@ a:hover {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.flow-icon:hover,
-.flow-icon:focus-visible {
-  border-color: var(--accent);
-  transform: rotate(0deg) scale(1.08);
-}
-
-.flow-icon:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
 }
 
 /* The track holds four copies of the row, so sliding it by half lands
