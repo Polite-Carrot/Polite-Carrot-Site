@@ -331,9 +331,12 @@ a:hover {
   color: var(--accent);
 }
 
-.menu-games img {
+.menu-games img,
+.menu-games .art-placeholder {
   width: 40px;
   height: 40px;
+  flex: none;
+  padding: 0;
   border-radius: 24%;
   border: 1px solid var(--border-4);
   object-fit: cover;
